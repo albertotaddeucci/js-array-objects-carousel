@@ -32,10 +32,6 @@
 }
 
 
-/* #side-slider > div {
-    height: calc(100%/5);
-} */
-
 #image-text{
 
     position: absolute;
@@ -75,6 +71,11 @@ img {
 
 #image-text div:not(.active) {
     display: none;
+}
+
+#side-slider div:hover{
+    filter: brightness(1);
+    transition: 0.3s ease;
 }
 
 

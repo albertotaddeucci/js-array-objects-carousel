@@ -85,7 +85,7 @@ images.forEach(currentImage => {
     const captionElement = document.createElement("div");
     const titleElement = document.createElement("h2");
     const textElement = document.createElement("p");
-    
+
     for(let key in currentImage){
         
         if (key == "image"){
@@ -112,8 +112,19 @@ images.forEach(currentImage => {
     //aggiungo in pagina elementi creati
     sideSliderElement.append(sideElement)           
     captionSliderElement.append(captionElement);
-
-
+    
+    
+    sideElement.addEventListener("click", function(){
+        if (!this.classList.contains("active")){
+            const activeClasses = document.querySelectorAll("#side-slider div.active");
+            activeClasses.forEach(singlediv =>{
+                singlediv.classList.remove("active");
+            })
+            
+            this.classList.add("active")
+        }
+    })
+    
 })
 
 //aggiunta classi active agli elementi
@@ -208,6 +219,8 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
 
 
 });
+
+
 
 
 
