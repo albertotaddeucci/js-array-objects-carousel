@@ -65,14 +65,15 @@ document.querySelector("#side-slider div:nth-of-type(1)").className = "active";
 document.querySelector("#image-text h2:nth-of-type(1)").className = "active";
 document.querySelector("#image-text p:nth-of-type(1)").className = "active";
 
-
-// -  salvo un contatore della slide
 let slideNumber = 1;
+
+const autoPlay = setInterval(arrowClick,3000)
+
 
 // -  QUANDO premo la freccia SU
 document.querySelector("#up-arrow").addEventListener("click", function() {
 
-
+    
     if (slideNumber < images.length) {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
@@ -93,7 +94,6 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
         document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.add("active");
         
 
-        console.log(slideNumber);
 
     } else {
 
@@ -121,6 +121,8 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
 
 
 document.querySelector("#down-arrow").addEventListener("click", function() {
+
+
 
     if (slideNumber > 1) {
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
@@ -167,3 +169,12 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
 
 
 });
+// -  salvo un contatore della slide
+
+
+function arrowClick(){
+
+    document.querySelector("#up-arrow").click()
+
+}
+
