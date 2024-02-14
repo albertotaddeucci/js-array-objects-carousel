@@ -25,6 +25,46 @@ const images = [
 
 
 
+//buttons
+const buttonPlay = document.getElementById("button-start");
+const buttonEnd = document.getElementById("button-end");
+const buttonSwitch = document.getElementById("button-switch");
+let onPlay = true;
+let upPlay = true;
+
+buttonPlay.addEventListener("click",function(){
+    if (!onPlay){
+        autoPlay = setInterval(arrowClick,3000);
+        onPlay = true;
+    }
+    
+   
+
+});
+buttonEnd.addEventListener("click",function(){
+    clearInterval(autoPlay);
+    clearInterval(autoSwitch);
+    onPlay = false;
+
+});
+
+let autoSwitch;
+buttonSwitch.addEventListener("click",function(){    
+    if (upPlay == true){
+        clearInterval(autoPlay);
+        autoSwitch = setInterval(arrowSwitch,3000);
+        upPlay = false;        
+    } else {
+        clearInterval(autoSwitch);
+        autoPlay = setInterval(arrowClick,3000)
+        upPlay = true
+
+    }
+    
+})
+
+
+
 // bersagliamo lo slider
 const sliderElement = document.getElementById("slider");
 const sideSliderElement = document.getElementById("side-slider");
@@ -67,7 +107,7 @@ document.querySelector("#image-text p:nth-of-type(1)").className = "active";
 
 let slideNumber = 1;
 
-const autoPlay = setInterval(arrowClick,3000)
+let autoPlay = setInterval(arrowClick,3000)
 
 
 // -  QUANDO premo la freccia SU
@@ -119,7 +159,7 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
         
 });
 
-
+// -  QUANDO premo la freccia giù
 document.querySelector("#down-arrow").addEventListener("click", function() {
 
 
@@ -169,12 +209,17 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
 
 
 });
-// -  salvo un contatore della slide
 
 
 function arrowClick(){
 
     document.querySelector("#up-arrow").click()
+
+}
+
+function arrowSwitch(){
+
+    document.querySelector("#down-arrow").click()
 
 }
 
