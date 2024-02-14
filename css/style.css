@@ -32,9 +32,9 @@
 }
 
 
-#side-slider > div {
+/* #side-slider > div {
     height: calc(100%/5);
-}
+} */
 
 #image-text{
 
@@ -51,11 +51,13 @@
 
 img {
     width: 100%;
-    height: 100%;
-    
+    height: 100%;    
 
     object-fit: cover;
 }
+
+
+/* --------------------------- toggle stato active --------------------------- */
 
 #slider img:not(.active) {
     display: none;
@@ -71,13 +73,10 @@ img {
 }
 
 
-#image-text h2:not(.active) {
+#image-text div:not(.active) {
     display: none;
 }
 
-#image-text p:not(.active) {
-    display: none;
-}
 
 .thumb-active{
     border: 2px solid white;
@@ -86,7 +85,7 @@ img {
 
 
 
-
+/* --------------------------------- arrows --------------------------------- */
 
 #arrows {
     display: flex;

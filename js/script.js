@@ -1,4 +1,5 @@
 
+//array objcets
 const images = [
     {
         image: 'img/01.webp',
@@ -20,7 +21,7 @@ const images = [
         image: 'img/05.webp',
         title: "Marvel's Avengers",
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
-    }
+    },
 ];
 
 
@@ -29,25 +30,31 @@ const images = [
 const buttonPlay = document.getElementById("button-start");
 const buttonEnd = document.getElementById("button-end");
 const buttonSwitch = document.getElementById("button-switch");
+
+//variabile se in autoplay
 let onPlay = true;
+
+//variabile se scorrimento ascendente
 let upPlay = true;
 
+//button start
 buttonPlay.addEventListener("click",function(){
     if (!onPlay){
         autoPlay = setInterval(arrowClick,3000);
         onPlay = true;
-    }
-    
-   
-
+    }    
 });
+
+//button end
 buttonEnd.addEventListener("click",function(){
     clearInterval(autoPlay);
     clearInterval(autoSwitch);
     onPlay = false;
-
+    
 });
 
+
+//button switch direction
 let autoSwitch;
 buttonSwitch.addEventListener("click",function(){    
     if (upPlay == true){
@@ -58,14 +65,15 @@ buttonSwitch.addEventListener("click",function(){
         clearInterval(autoSwitch);
         autoPlay = setInterval(arrowClick,3000)
         upPlay = true
-
     }
     
 })
 
+// Autoplay
+let autoPlay = setInterval(arrowClick,3000);
 
 
-// bersagliamo lo slider
+// costanti per lo slider
 const sliderElement = document.getElementById("slider");
 const sideSliderElement = document.getElementById("side-slider");
 const captionSliderElement = document.getElementById("image-text");
@@ -73,41 +81,49 @@ const captionSliderElement = document.getElementById("image-text");
 
 //ciclo per inserire img 
 images.forEach(currentImage => {
-
+    const sideElement = document.createElement("div");
+    const captionElement = document.createElement("div");
+    const titleElement = document.createElement("h2");
+    const textElement = document.createElement("p");
     
     for(let key in currentImage){
         
         if (key == "image"){
+
+            //immagini in slideshow principale
             sliderElement.innerHTML += `<img src="./${currentImage.image}">`;
             
-            const sideElement = document.createElement("div");
+            //immagini in side-slider
             sideElement.innerHTML += `<img src="./${currentImage.image}">`;
-            sideSliderElement.append(sideElement)           
-
+            sideElement.style = `height: calc(100%/${images.length});`
+            
         } else if (key == "title") {
-
-            const titleElement = document.createElement("h2");
+            
             titleElement.innerHTML += `${currentImage.title}`;
-            captionSliderElement.append(titleElement);
-
+            captionElement.append(titleElement);
+            
         } else {
-            const textElement = document.createElement("p");
             textElement.innerHTML += `${currentImage.text}`;
-            captionSliderElement.append(textElement);
-
+            captionElement.append(textElement);
+            
         }
     }
+    
+    //aggiungo in pagina elementi creati
+    sideSliderElement.append(sideElement)           
+    captionSliderElement.append(captionElement);
+
+
 })
 
-
+//aggiunta classi active agli elementi
 document.querySelector("#slider img:nth-of-type(1)").className = "active";
 document.querySelector("#side-slider div:nth-of-type(1)").className = "active";
-document.querySelector("#image-text h2:nth-of-type(1)").className = "active";
-document.querySelector("#image-text p:nth-of-type(1)").className = "active";
+document.querySelector("#image-text div:nth-of-type(1)").className = "active";
 
+//contatore slider immagini
 let slideNumber = 1;
 
-let autoPlay = setInterval(arrowClick,3000)
 
 
 // -  QUANDO premo la freccia SU
@@ -119,9 +135,7 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#side-slider div:nth-of-type(${slideNumber})`).classList.remove("active");
-        document.querySelector(`#image-text h2:nth-of-type(${slideNumber})`).classList.remove("active");
-        document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.remove("active");
-        
+        document.querySelector(`#image-text div:nth-of-type(${slideNumber})`).classList.remove("active");        
         
         
         // - aumento il contatore di 1
@@ -130,9 +144,7 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#side-slider div:nth-of-type(${slideNumber})`).classList.add("active");
-        document.querySelector(`#image-text h2:nth-of-type(${slideNumber})`).classList.add("active");
-        document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.add("active");
-        
+        document.querySelector(`#image-text div:nth-of-type(${slideNumber})`).classList.add("active");        
 
 
     } else {
@@ -140,9 +152,7 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#side-slider div:nth-of-type(${slideNumber})`).classList.remove("active");
-        document.querySelector(`#image-text h2:nth-of-type(${slideNumber})`).classList.remove("active");
-        document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.remove("active");
-
+        document.querySelector(`#image-text div:nth-of-type(${slideNumber})`).classList.remove("active");
 
         // resetto la variabile che mi conta l'immagine a cui sono arrivato
         slideNumber = 1;
@@ -150,9 +160,7 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#side-slider div:nth-of-type(${slideNumber})`).classList.add("active");
-        document.querySelector(`#image-text h2:nth-of-type(${slideNumber})`).classList.add("active");
-        document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.add("active");
-
+        document.querySelector(`#image-text div:nth-of-type(${slideNumber})`).classList.add("active");
 
     }
 
@@ -168,9 +176,7 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#side-slider div:nth-of-type(${slideNumber})`).classList.remove("active");
-        document.querySelector(`#image-text h2:nth-of-type(${slideNumber})`).classList.remove("active");
-        document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.remove("active");
-
+        document.querySelector(`#image-text div:nth-of-type(${slideNumber})`).classList.remove("active");
 
 
         // - diminuisco il contatore di 1
@@ -179,20 +185,15 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#side-slider div:nth-of-type(${slideNumber})`).classList.add("active");
-        document.querySelector(`#image-text h2:nth-of-type(${slideNumber})`).classList.add("active");
-        document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.add("active");
+        document.querySelector(`#image-text div:nth-of-type(${slideNumber})`).classList.add("active");
 
-
-        console.log(slideNumber);
 
     } else {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#side-slider div:nth-of-type(${slideNumber})`).classList.remove("active");
-        document.querySelector(`#image-text h2:nth-of-type(${slideNumber})`).classList.remove("active");
-        document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.remove("active");
-
+        document.querySelector(`#image-text div:nth-of-type(${slideNumber})`).classList.remove("active");
 
         // - metto il valore di slideNumebr = alla posizione dell'ultima immagine
         slideNumber = images.length;
@@ -200,9 +201,7 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#side-slider div:nth-of-type(${slideNumber})`).classList.add("active");
-        document.querySelector(`#image-text h2:nth-of-type(${slideNumber})`).classList.add("active");
-        document.querySelector(`#image-text p:nth-of-type(${slideNumber})`).classList.add("active");
-
+        document.querySelector(`#image-text div:nth-of-type(${slideNumber})`).classList.add("active");
 
     }
     
@@ -211,12 +210,17 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
 });
 
 
+
+
+
+//funzione per click freccia su
 function arrowClick(){
 
     document.querySelector("#up-arrow").click()
 
 }
 
+//funzione per click freccia giù
 function arrowSwitch(){
 
     document.querySelector("#down-arrow").click()
