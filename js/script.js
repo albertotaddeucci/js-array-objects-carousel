@@ -130,7 +130,7 @@ images.forEach((currentImage,index) => {
             document.querySelector(`#slider img:nth-of-type(${index+1})`).classList.add("active");
             console.log(index)
 
-            slideNumber = `${index}`
+            slideNumber = `${index+1}`
 
             
 
