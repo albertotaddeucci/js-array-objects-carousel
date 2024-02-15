@@ -80,7 +80,7 @@ const captionSliderElement = document.getElementById("image-text");
 
 
 //ciclo per inserire img 
-images.forEach(currentImage => {
+images.forEach((currentImage,index) => {
     const sideElement = document.createElement("div");
     const captionElement = document.createElement("div");
     const titleElement = document.createElement("h2");
@@ -122,10 +122,23 @@ images.forEach(currentImage => {
             })
             
             this.classList.add("active")
+            
+            const activeClassesMain = document.querySelectorAll("#slider img.active");
+            activeClassesMain.forEach(singlediv =>{
+                singlediv.classList.remove("active");
+            })
+            document.querySelector(`#slider img:nth-of-type(${index+1})`).classList.add("active");
+            console.log(index)
+
+            slideNumber = `${index}`
+
+            
+
         }
     })
     
 })
+
 
 //aggiunta classi active agli elementi
 document.querySelector("#slider img:nth-of-type(1)").className = "active";
