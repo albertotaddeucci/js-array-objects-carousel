@@ -127,7 +127,16 @@ images.forEach((currentImage,index) => {
             activeClassesMain.forEach(singlediv =>{
                 singlediv.classList.remove("active");
             })
+
             document.querySelector(`#slider img:nth-of-type(${index+1})`).classList.add("active");
+            console.log(index)
+
+            const activeClassesText = document.querySelectorAll("#image-text div.active");
+            activeClassesText.forEach(singlediv =>{
+                singlediv.classList.remove("active");
+            })
+            
+            document.querySelector(`#image-text div:nth-of-type(${index+1})`).classList.add("active");
             console.log(index)
 
             slideNumber = `${index+1}`
